@@ -51,31 +51,37 @@ class App(ctk.CTk):
         en_name = ctk.CTkEntry(
             self,
             width=350,
-            font=("Century Gohtic", 16),
+            font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Nome",
         )
         en_contact = ctk.CTkEntry(
             self,
             width=200,
-            font=("Century Gohtic", 16),
+            font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Contato",
         )
         en_age = ctk.CTkEntry(
             self,
             width=150,
-            font=("Century Gohtic", 16),
+            font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Idade",
         )
         en_address = ctk.CTkEntry(
             self,
             width=200,
-            font=("Century Gohtic", 16),
+            font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Endereço",
         )
+
+        # Combobox
+        opt_gender = ctk.CTkComboBox(
+            self, values=["Masculino", "Feminino"], font=("Century Gohtic bold", 14)
+        )
+        opt_gender.set("Masculino")
 
         # Labels
         lb_name = ctk.CTkLabel(
