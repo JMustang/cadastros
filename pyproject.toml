@@ -1,0 +1,65 @@
+[tool.poetry]
+name = "cadastros"
+version = "0.1.0"
+description = ""
+authors = ["Junior <eecfredes@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+customtkinter = "^5.2.1"
+openpyxl = "^3.1.2"
+pathlib = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+taskipy = "^1.12.2"
+blue = "^0.9.1"
+ruff = "^0.1.6"
+httpx = "^0.25.2"
+isort = "^5.12.0"
+
+
+# vamos definir o comprimento de linha para 79 caracteres 
+# (conforme sugerido na PEP 8) e em seguida,
+# informaremos que o diretório de ambiente virtual
+# e o de migrações de banco de dados deverão ser ignorados:
+[tool.ruff]
+line-length = 79
+exclude = ['.venv', 'migrations']
+
+# Para evitar conflitos de formatação entre o isort e o blue, 
+# definiremos o black como perfil de formatação a ser seguido, 
+# já que o blue é um fork dele. Como o black utiliza 88 caracteres por linha, 
+# vamos alterar para 79 que é o padrão que o blue segue e que também
+# estamos seguindo:
+[tool.isort]
+profile = "black"
+line_length = 79
+extend_skip = ['migrations']
+
+# Configuraremos o pytest 
+# para reconhecer o caminho base para execução dos testes na raiz do projeto .:
+[tool.pytest.ini_options]
+pythonpath = "."
+
+# Configuraremos o blue para excluir o caminho
+# das migrações quando essas forem utilizadas:
+[tool.blue]
+extend-exclude = '(migrations/)'
+
+# Para simplificar a execução de certos comandos, 
+# vamos criar algumas tarefas com o Taskipy.
+[tool.taskipy.tasks]
+lint = 'ruff . && blue --check . --diff'
+format = 'blue .  && isort .'
+run = 'uvicorn fast_zero.app:app --reload'
+pre_test = 'task lint'
+test = 'pytest -s -x --cov=fast_zero -vv'
+post_test = 'coverage html'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
