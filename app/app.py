@@ -83,6 +83,17 @@ class App(ctk.CTk):
         )
         opt_gender.set("Masculino")
 
+        # TextBox
+        txt_opt = ctk.CTkTextbox(
+            self,
+            width=500,
+            height=150,
+            font=("Arial", 18),
+            border_color="#aaa",
+            border_width=2,
+            fg_color="transparent",
+        )
+
         # Labels
         lb_name = ctk.CTkLabel(
             self,
