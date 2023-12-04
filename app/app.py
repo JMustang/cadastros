@@ -19,6 +19,7 @@ class App(ctk.CTk):
     def layout_config(self):
         self.title("Cadastros")
         self.geometry("700x500")
+        self.resizable(False, False)  # Impede a redimensionamento horizontal e vertical
 
     def appearence(self):
         self.lb_apm = ctk.CTkLabel(
@@ -38,8 +39,11 @@ class App(ctk.CTk):
             fg_color="darkmagenta",
         ).place(x=0, y=10)
         title = ctk.CTkLabel(
-            frame, text="Cadastros", font=("Arial bold", 24), text_color="#fff"
-        )
+            frame,
+            text="Cadastros",
+            font=("Arial bold", 24),
+            text_color="#aaa",
+        ).place(x=260, y=25)
         span = ctk.CTkLabel(
             self,
             text="Por favor, preencha o formulário!",
@@ -79,7 +83,10 @@ class App(ctk.CTk):
 
         # Combobox
         opt_gender = ctk.CTkComboBox(
-            self, values=["Masculino", "Feminino"], font=("Century Gohtic bold", 14)
+            self,
+            values=["Masculino", "Feminino"],
+            font=("Century Gohtic bold", 14),
+            width=150,
         )
         opt_gender.set("Masculino")
 
@@ -97,40 +104,59 @@ class App(ctk.CTk):
         # Labels
         lb_name = ctk.CTkLabel(
             self,
-            text="Por favor, preencha o formulário!",
+            text="Nome:",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
-        ).place(x=50, y=70)
+        )
         lb_contact = ctk.CTkLabel(
             self,
-            text="Por favor, preencha o formulário!",
+            text="Contato:",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
         )
         lb_age = ctk.CTkLabel(
             self,
-            text="Por favor, preencha o formulário!",
+            text="Idade:",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
         )
         lb_gender = ctk.CTkLabel(
             self,
-            text="Por favor, preencha o formulário!",
+            text="Genero:",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
         )
-        lb_opt = ctk.CTkLabel(
+        lb_address = ctk.CTkLabel(
             self,
-            text="Por favor, preencha o formulário!",
+            text="endereço:",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
         )
-        lb_name = ctk.CTkLabel(
+        lb_obs = ctk.CTkLabel(
             self,
-            text="Por favor, preencha o formulário!",
+            text="observação:",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
         )
+
+        # Posicionando
+        lb_name.place(x=50, y=120)
+        en_name.place(x=50, y=150)
+
+        lb_contact.place(x=450, y=120)
+        en_contact.place(x=450, y=150)
+
+        lb_age.place(x=300, y=190)
+        en_age.place(x=300, y=220)
+
+        lb_gender.place(x=500, y=190)
+        opt_gender.place(x=500, y=220)
+
+        lb_address.place(x=50, y=190)
+        en_address.place(x=50, y=220)
+
+        lb_obs.place(x=50, y=260)
+        txt_opt.place(x=150, y=260)
 
     def change_apm(self, theme):
         ctk.set_appearance_mode(theme)
