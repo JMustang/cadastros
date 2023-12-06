@@ -51,6 +51,13 @@ class App(ctk.CTk):
             text_color=["#000", "#fff"],
         ).place(x=50, y=70)
 
+        # Funcao dos botoes
+        def salva():
+            pass
+
+        def limpar():
+            pass
+
         # Entrys
         en_name = ctk.CTkEntry(
             self,
@@ -152,7 +159,7 @@ class App(ctk.CTk):
             text="Limpar campos".upper(),
             command=limpar,
             fg_color="#555",
-            hover_color="333",
+            hover_color="#333",
         ).place(x=500, y=420)
 
         # Posicionando
