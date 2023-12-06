@@ -139,6 +139,22 @@ class App(ctk.CTk):
             text_color=["#000", "#fff"],
         )
 
+        # Botões
+        btn_save = ctk.CTkButton(
+            self,
+            text="Salva dados".upper(),
+            command=salva,
+            fg_color="#151",
+            hover_color="#131",
+        ).place(x=300, y=420)
+        btn_clear = ctk.CTkButton(
+            self,
+            text="Limpar campos".upper(),
+            command=limpar,
+            fg_color="#555",
+            hover_color="333",
+        ).place(x=500, y=420)
+
         # Posicionando
         lb_name.place(x=50, y=120)
         en_name.place(x=50, y=150)
