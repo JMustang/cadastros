@@ -4,6 +4,7 @@ from tkinter import messagebox
 import openpyxl, xlrd
 import pathlib
 from openpyxl import Workbook
+from tkinter import StringVar
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -53,15 +54,31 @@ class App(ctk.CTk):
 
         # Funcao dos botoes
         def salva():
-            pass
+            name = name_value.get()
+            contact = contact_value.get()
+            age = age_value.get()
+            address = address_value.get()
+            gender = opt_gender.get()
+            obs = txt_opt.get(0.0, END)
 
         def limpar():
-            pass
+            name_value.set("")
+            contact_value.set("")
+            age_value.set("")
+            address_value.set("")
+            txt_opt.delete(0.0, END)
+
+        # Texts variables
+        name_value = StringVar()
+        contact_value = StringVar()
+        age_value = StringVar()
+        address_value = StringVar()
 
         # Entrys
         en_name = ctk.CTkEntry(
             self,
             width=350,
+            textvariable=name_value,
             font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Nome",
@@ -69,6 +86,7 @@ class App(ctk.CTk):
         en_contact = ctk.CTkEntry(
             self,
             width=200,
+            textvariable=contact_value,
             font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Contato",
@@ -76,6 +94,7 @@ class App(ctk.CTk):
         en_age = ctk.CTkEntry(
             self,
             width=150,
+            textvariable=age_value,
             font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Idade",
@@ -83,6 +102,7 @@ class App(ctk.CTk):
         en_address = ctk.CTkEntry(
             self,
             width=200,
+            textvariable=address_value,
             font=("Century Gohtic bold", 16),
             fg_color="transparent",
             placeholder_text="Endereço",
