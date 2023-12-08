@@ -38,19 +38,37 @@ class App(ctk.CTk):
             corner_radius=0,
             bg_color="darkmagenta",
             fg_color="darkmagenta",
-        ).place(x=0, y=10)
+        )
+        frame.place(x=0, y=0)
         title = ctk.CTkLabel(
             frame,
             text="Cadastros",
             font=("Arial bold", 24),
             text_color="#aaa",
-        ).place(x=260, y=25)
+        ).place(x=275, y=10)
         span = ctk.CTkLabel(
             self,
             text="Por favor, preencha o formulário!",
             font=("Arial bold", 16),
             text_color=["#000", "#fff"],
         ).place(x=50, y=70)
+
+        tabela = pathlib.Path("Cadastros.xlsx")
+        if tabela.exists():
+            pass
+        else:
+            tabela = Workbook()
+            tabela.save("Cadastros.xlsx")
+            tabela = openpyxl.load_workbook("Cadastros.xlsx")
+            data = tabela.active
+            data["A1"] = "Nome completo"
+            data["B1"] = "Contato"
+            data["C1"] = "Idade"
+            data["D1"] = "Genero"
+            data["E1"] = "Endereco"
+            data["F1"] = "Obcervacoes"
+            tabela.save(r"Cadastros.xlsx")
+            messagebox.showinfo("Sistema", "Arquivo criado com sucesso!")
 
         # Funcao dos botoes
         def salva():
@@ -60,6 +78,29 @@ class App(ctk.CTk):
             address = address_value.get()
             gender = opt_gender.get()
             obs = txt_opt.get(0.0, END)
+
+            if (
+                name == ""
+                or contact == ""
+                or age == ""
+                or address == ""
+                or gender == ""
+                or obs == ""
+            ):
+                messagebox.showerror("Sistema", "ERROR!\nPreencha todos os campos!")
+                return
+
+            tabela = openpyxl.load_workbook("Cadastros.xlsx")
+            data = tabela.active
+            data.cell(row=data.max_row + 1, column=1, value=name)
+            data.cell(row=data.max_row, column=2, value=contact)
+            data.cell(row=data.max_row, column=3, value=age)
+            data.cell(row=data.max_row, column=4, value=address)
+            data.cell(row=data.max_row, column=5, value=gender)
+            data.cell(row=data.max_row, column=6, value=obs)
+
+            tabela.save(r"Cadastros.xlsx")
+            messagebox.showinfo("Sistema", "Dados salvos com sucesso!")
 
         def limpar():
             name_value.set("")
